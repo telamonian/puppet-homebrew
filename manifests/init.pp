@@ -18,8 +18,13 @@ class homebrew(
   include boxen::config
   include homebrew::repo
 
+  $repoleaf = $osfamily ? {
+	  'Darwin' => 'homebrew',
+    default  => 'linuxbrew',
+  }
+
   repository { $installdir:
-    source => 'Homebrew/homebrew',
+    source => "Homebrew/${repoleaf}",
     user   => $::boxen_user
   }
 
@@ -32,7 +37,7 @@ class homebrew(
     "${installdir}/Library/Homebrew/boxen-monkeypatches.rb":
       ensure => 'absent',
   }
-
+  
   file {
     [$cachedir, $tapsdir, $cmddir, $libdir]:
       ensure => 'directory' ;
