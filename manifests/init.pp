@@ -19,7 +19,7 @@ class homebrew(
   include homebrew::repo
 
   $repoleaf = $osfamily ? {
-	  'Darwin' => 'homebrew',
+    'Darwin' => 'homebrew',
     default  => 'linuxbrew',
   }
 

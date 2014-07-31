@@ -29,7 +29,7 @@ Puppet::Type.type(:package).provide :homebrew, :parent => Puppet::Provider::Pack
     end
   end
 
-  confine  :operatingsystem => :darwin
+#  confine  :operatingsystem => :darwin
 
   def self.active?(name, version)
     current(name) == version
@@ -164,6 +164,7 @@ Puppet::Type.type(:package).provide :homebrew, :parent => Puppet::Provider::Pack
     case Facter[:osfamily].value
     when "Darwin" then "Users"
     when "Linux" then "home"
+    when "Debian" then "home"
     else
       raise "unsupported"
     end

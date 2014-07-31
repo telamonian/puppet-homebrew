@@ -7,7 +7,7 @@ Puppet::Type.type(:homebrew_repo).provide :homebrew do
 
   optional_commands :git => 'git'
 
-  confine :operatingsystem => :darwin
+#  confine :operatingsystem => :darwin
 
   def self.home
     if boxen_home = Facter.value(:boxen_home)
@@ -82,6 +82,7 @@ Puppet::Type.type(:homebrew_repo).provide :homebrew do
     case Facter[:osfamily].value
     when "Darwin" then "Users"
     when "Linux" then "home"
+    when "Debian" then "home"
     else
       raise "unsupported"
     end
