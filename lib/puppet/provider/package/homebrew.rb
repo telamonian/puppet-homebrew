@@ -81,7 +81,7 @@ Puppet::Type.type(:package).provide :homebrew, :parent => Puppet::Provider::Pack
       # Nothing here? Nothing from before? Yay! It's a normal install.
 
       if install_options.any?
-        execute [ "brew", "install", @resource[:name], *install_options ].flatten, command_opts
+        execute [ "brew", "install", @resource[:name], '--verbose', *install_options ].flatten, command_opts
       else
         execute [ "brew", "boxen-install", @resource[:name] ], command_opts
       end
@@ -188,6 +188,7 @@ Puppet::Type.type(:package).provide :homebrew, :parent => Puppet::Provider::Pack
       :custom_environment => {
         "HOME"            => "/#{homedir_prefix}/#{default_user}",
         "PATH"            => "#{self.class.home}/bin:/usr/bin:/usr/sbin:/bin:/sbin",
+        "LD_LIBRARY_PATH" => "#{self.class.home}/lib",
         "CFLAGS"          => "-O2",
         "CPPFLAGS"        => "-O2",
         "CXXFLAGS"        => "-O2",
