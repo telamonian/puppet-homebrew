@@ -14,14 +14,14 @@ define homebrew::formula($source = undef) {
 
   ensure_resource('file', $boxen_tapdir, {
     'ensure' => 'directory',
+    'group'  => $::boxen_group,
     'owner'  => $::boxen_user,
-    'group'  => $boxen::config::group,
   })
 
   ensure_resource('file', "${boxen_tapdir}/homebrew-brews", {
     'ensure'  => 'directory',
+    'group'   => $::boxen_group,
     'owner'   => $::boxen_user,
-    'group'   => $boxen::config::group,
     'require' => File[$boxen_tapdir],
   })
 

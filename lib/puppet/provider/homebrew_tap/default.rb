@@ -75,8 +75,8 @@ Puppet::Type.type(:homebrew_tap).provide :default do
   def homedir_prefix
     case Facter[:osfamily].value
     when "Darwin" then "Users"
-    when "Linux" then "home"
     when "Debian" then "home"
+    when "Linux" then "home"
     else
       raise "unsupported"
     end
